@@ -1,0 +1,43 @@
+{"id": "182b03258673da5f", 
+"threadId": "182b03258673da5f", 
+"labelIds": ["Label_1883260402191624253", "SENT", "INBOX"], 
+"snippet": "メール送信の自動化テストをしています。テストでーーーーーす", 
+"payload": {
+    "partId": "", 
+    "mimeType": "multipart/mixed", 
+    "filename": "", 
+    "headers": [
+        {"name": "Received", "value": "from 837386307571 named unknown by gmailapi.google.com with HTTPREST; Thu, 18 Aug 2022 02:04:25 -0700"}, 
+        {"name": "Content-Type", "value": "multipart/mixed; boundary="===============3137153585299131561==""}, 
+        {"name": "MIME-Version", "value": "1.0"}, 
+        {"name": "to", "value": "intern.ohg.24b@gmail.com"}, 
+        {"name": "from", "value": "intern.ohg.24b@gmail.com"}, 
+        {"name": "subject", "value": "メール送信自動化テスト"}, 
+        {"name": "Date", "value": "Thu, 18 Aug 2022 02:04:25 -0700"}, 
+        {"name": "Message-Id", "value": "<CAP68sU5r8OoJjg+v8hxK8moveRrasCadQkbS_jjeADudTAWv=g@mail.gmail.com>"}
+    ], 
+    "body": {"size": 0}, 
+    "parts": [
+        {
+            "partId": "0", "mimeType": "application/octet-stream", "filename": "image.png", 
+            "headers": [
+                {"name": "Content-Type", "value": "application/octet-stream; Name="image.png""}, 
+                {"name": "MIME-Version", "value": "1.0"}, 
+                {"name": "Content-Transfer-Encoding", "value": "base64"}, 
+                {"name": "Content-Disposition", "value": "attachment; filename="image.png""}
+            ], 
+            "body": {
+                "attachmentId": "ANGjdJ-hXhbthlpZSUPEtkY_NrbFeuyxe0G0iP5R_VO7LfCafcxvTGPl93KzfdFlUqDc2xAHw5f7vV-U-cYk6eyL0ayzHTTm7zugnfYhMYIbxFTVzextT_buiPrCtGFQJNCwfBHXTiRAPI9t1hPrPKQWk8P72CXVi11eeLu45vliBRsvn-wETwEguMerWiT_A26pCQRQPnutJju3N718rOIwjCO2gGP-u438O2nhGz9guPplqMFrNNXWldw9rrqUm3JwkuMUcOzn4JF4dynzOo64uy_LIBTs40e-vq1v1bkH47Ewo2OdNS7IIGvNsOnCN9z9u5VZQD0i1WdLIDHns13W6Uy_PTBow5pQR1u5yF73s0XSJjH_sjEtT5PIrGY47-C0GQzkLbWCZHJpWAca", "size": 2332084}}, 
+                {
+                    "partId": "1", "mimeType": "text/plain", "filename": "", 
+                    "headers": [
+                        {"name": "Content-Type", "value": "text/plain; charset="utf-8""}, 
+                        {"name": "MIME-Version", "value": "1.0"}, 
+                        {"name": "Content-Transfer-Encoding", "value": "base64"}],
+                    "body": {
+                        "size": 87, 
+                        "data": "44Oh44O844Or6YCB5L-h44Gu6Ieq5YuV5YyW44OG44K544OI44KS44GX44Gm44GE44G-44GZ44CC44OG44K544OI44Gn44O844O844O844O844O844GZ"
+                    }
+                }
+        ]
+    }, "sizeEstimate": 3151332, "historyId": "2415", "internalDate": "1660813465000"}
