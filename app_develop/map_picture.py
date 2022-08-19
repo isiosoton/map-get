@@ -11,18 +11,18 @@ from selenium.webdriver.support import expected_conditions as EC
 map_spots = {"spots":["千葉県","埼玉県"], "items":["道路","下水"]}
 
 # driver = webdriver.Chrome()
+
 # driver.get("https://www.google.co.jp/maps")
 # driver.find_element(By.XPATH,'//*[@id="searchboxinput"]').send_keys("GINZA SIX")
 # driver.find_element(By.XPATH,'//*[@id="searchbox-searchbutton"]').click()
 # time.sleep(10)
 
-# driver = webdriver.Chrome()
-# driver.get("http://s-page.tumsy.com/chibagesui/index.html")
+driver = webdriver.Chrome()
+driver.get("http://s-page.tumsy.com/chibagesui/index.html")
 
 # time.sleep(10)
-# driver.find_element(By.XPATH,'//*[@id="LinkButton2"]').click()
-driver.find_element(By.XPATH,'//*[@id="main-contents"]/section/article/div[4]/div/p[3]/select').send_keys("2021")
-
+driver.find_element(By.XPATH,'//*[@id="LinkButton2"]').click()
+driver.find_element(By.XPATH,'//*[@id="main-contents"]/section/article/div[4]/div/p[3]/select').send_keys("中央区")
 # driver.find_element(By.XPATH,'//*[@id="searchboxinput"]').send_keys("GINZA SIX")
 # Select(driver.find_element_by_id('dropdown')).select_by_visible_text('3番目')
 # time.sleep(10)
