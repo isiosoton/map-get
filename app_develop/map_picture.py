@@ -39,4 +39,3 @@ driver.find_element(By.XPATH,'//*[@id="main-contents"]/section/article/div[4]/di
 # driver.save_screenshot(FILENAME)
 # driver.quit()
 
-
