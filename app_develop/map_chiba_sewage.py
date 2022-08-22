@@ -8,10 +8,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 
-driver = webdriver.Chrome()
-driver.maximize_window()
-driver.get("http://s-page.tumsy.com/chibagesui/index.html")
-time.sleep(1)
+
 # driver.find_element(By.XPATH,'//*[@id="LinkButton1"]').click()
 oojimei = "花見川区"
 jityoumei = "朝日ケ丘"
@@ -20,6 +17,10 @@ banogo = "２番"
 FILENAME = "image.png"
 
 def chiba_sewage(ku = "中央区", tyomei = "青葉町", tyoume = "丁目なし", gaiku = "３５９番地"):
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    driver.get("http://s-page.tumsy.com/chibagesui/index.html")
+    time.sleep(1)
     iframe = driver.find_element(By.TAG_NAME,"frame")
     driver.switch_to.frame(iframe)
     driver.find_element(By.XPATH,'//*[@id="LinkButton1"]').click()
@@ -46,7 +47,8 @@ def chiba_sewage(ku = "中央区", tyomei = "青葉町", tyoume = "丁目なし"
     driver.quit()
     return True
 
-chiba_sewage("花見川区","天戸町","丁目なし","１番地")
+# 動作確認用
+# chiba_sewage("花見川区","天戸町","丁目なし","１番地")
 
 # handle_array = driver.window_handles
 # driver.switch_to.window(driver.window_handles[0])

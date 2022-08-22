@@ -41,5 +41,6 @@ def chiba_street(oojimei = "中央区", jityoumei = "青葉町", gaiku = "7"):
     driver.quit()
     return True
 
-chiba_street("花見川区","朝日ケ丘１丁目","2")
+# 動作確認用
+# chiba_street("花見川区","朝日ケ丘１丁目","2")
 
