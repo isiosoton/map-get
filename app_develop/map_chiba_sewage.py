@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import chromedriver_binary
 import time
 from selenium import webdriver
@@ -8,52 +9,53 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Chrome()
+driver.maximize_window()
 driver.get("http://s-page.tumsy.com/chibagesui/index.html")
-# time.sleep(5)
-# driver.find_elements(By.XPATH,'//*[@id="title"]').click()
-
-# driver.find_element(By.XPATH,'//*[@id="title"]').send_keys(Keys.PAGE_DOWN) 
-
-time.sleep(5)
+time.sleep(1)
 # driver.find_element(By.XPATH,'//*[@id="LinkButton1"]').click()
+oojimei = "花見川区"
+jityoumei = "朝日ケ丘"
+gaiku = "１丁目"
+banogo = "２番"
+FILENAME = "image.png"
 
-# element = driver.find_element(By.XPATH,'//*[@id="LinkButton1"]')
+def chiba_sewage(ku = "中央区", tyomei = "青葉町", tyoume = "丁目なし", gaiku = "３５９番地"):
+    iframe = driver.find_element(By.TAG_NAME,"frame")
+    driver.switch_to.frame(iframe)
+    driver.find_element(By.XPATH,'//*[@id="LinkButton1"]').click()
+    time.sleep(1)
+    element = driver.find_element(By.XPATH,'//*[@id="ELM_CMB_LEV1"]')
+    element_select = Select(element)
+    element_select.select_by_visible_text(ku)
+    time.sleep(1)
+    element = driver.find_element(By.XPATH,'//*[@id="ELM_CMB_LEV2"]')
+    element_select = Select(element)
+    element_select.select_by_visible_text(tyomei)
+    time.sleep(1)
+    element = driver.find_element(By.XPATH,'//*[@id="ELM_CMB_LEV3"]')
+    element_select = Select(element)
+    element_select.select_by_visible_text(tyoume)
+    time.sleep(1)
+    element = driver.find_element(By.XPATH,'//*[@id="ELM_CMB_LEV4"]')
+    element_select = Select(element)
+    element_select.select_by_visible_text(gaiku)
+    time.sleep(1)
+    driver.find_element(By.XPATH,'//*[@id="btnAddSchDlgOK"]').click()
+    time.sleep(1)
+    driver.save_screenshot(FILENAME)
+    driver.quit()
+    return True
 
-# 要素を表示するようスクロール
-# ActionChains(driver).move_to_element(element).perform()
+chiba_sewage("花見川区","天戸町","丁目なし","１番地")
 
-# driver.find_element(By.TAG_NAME,'body').send_keys(Keys.END)
-
-# クリック
-# element.click()
-
-# element = driver.find_element(By.ID,'#LinkButton1')
-# driver.execute_script('arguments[0].click();', element)
-# driver.find_element(By.TAG_NAME,'body').send_keys(Keys.CONTROL, '0')
-# driver.find_element(By.TAG_NAME,'body').send_keys(Keys.END)
-
-# consoleでは下記JSコードが動く。
-# document.querySelector("#LinkButton1").click();
-
-# driver.execute_script("window.scrollTo(0, document.querySelector('#form1').scrollHeight);")
-
-driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-driver.execute_script('document.querySelector("#LinkButton1").click();')
-
-# driver.find_element(By.CLASS_NAME,'agr_btn').click()
-# driver.find_element(By.ID,'LinkButton1').click()
-# element = driver.find_elements(By.XPATH,'//*[@id="LinkButton1"]')
-# driver.execute_script('doPostBack("LinkButton1",'')', element)
-# driver.execute_script('document.getElementById("LinkButton1").click();')
-# driver.execute_script('document.getElementById("#LinkButton1").onclick();')
-# element = driver.execute_script('document.querySelector("#LinkButton1").onclick();')
-# element
-# driver.execute_script('#LinkButton1.click();', element)
-# driver.execute_script('LinkButton1[0].click();', element)
-# <a id="LinkButton1" href="javascript:__doPostBack('LinkButton1','')"></a>
-# print(element.text)
-# driver.switch_to.frame(element)
-# driver.switch_to.frame("element")
-time.sleep(10)
+# handle_array = driver.window_handles
+# driver.switch_to.window(driver.window_handles[0])
+# driver.get("http://s-page.tumsy.com/chibagesui/PrintPage.aspx")
+# time.sleep(5)
+# driver.find_element(By.XPATH,'//*[@id="btnA3L"]').click()
+# time.sleep(5)
+# driver.find_element(By.XPATH,'//*[@id="btnDownload"]').click()
+# driver.find_element(By.XPATH,'//*[@id="OpenPrintPage"]').click()
+# time.sleep(10)
 # driver.quit()
 
