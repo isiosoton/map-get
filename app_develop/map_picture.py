@@ -10,8 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 map_spots = {"spots":["千葉県","埼玉県"], "items":["道路","下水"]}
 
-# driver = webdriver.Chrome()
-
+driver = webdriver.Chrome()
 # driver.get("https://www.google.co.jp/maps")
 # driver.find_element(By.XPATH,'//*[@id="searchboxinput"]').send_keys("GINZA SIX")
 # driver.find_element(By.XPATH,'//*[@id="searchbox-searchbutton"]').click()
@@ -28,14 +27,14 @@ driver.find_element(By.XPATH,'//*[@id="main-contents"]/section/article/div[4]/di
 # time.sleep(10)
 
 # 1.操作するブラウザ
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 
 # 2.操作するページを開く（ブログのこのページ）
-driver.get('https://prcmyself.com/how-to-select-from-list-or-pull-down-selenium')
+# driver.get('https://prcmyself.com/how-to-select-from-list-or-pull-down-selenium')
 
 # 年度を指定
-driver.find_element(By.XPATH,'//*[@id="main-contents"]/section/article/div[4]/div/p[3]/select').send_keys("2021")
+# driver.find_element(By.XPATH,'//*[@id="main-contents"]/section/article/div[4]/div/p[3]/select').send_keys("2021")
 
-FILENAME = "test_selenium.png"
-driver.save_screenshot(FILENAME)
+# FILENAME = "test_selenium.png"
+# driver.save_screenshot(FILENAME)
 # driver.quit()
