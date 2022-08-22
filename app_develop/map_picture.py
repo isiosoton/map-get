@@ -17,9 +17,9 @@ driver = webdriver.Chrome()
 # time.sleep(10)
 
 driver = webdriver.Chrome()
-driver.get("http://s-page.tumsy.com/chibagesui/index.html")
+driver.get("https://webgis.alandis.jp/chiba12/portal/index.html")
 
-# time.sleep(10)
+time.sleep(10)
 driver.find_element(By.XPATH,'//*[@id="LinkButton2"]').click()
 driver.find_element(By.XPATH,'//*[@id="main-contents"]/section/article/div[4]/div/p[3]/select').send_keys("中央区")
 # driver.find_element(By.XPATH,'//*[@id="searchboxinput"]').send_keys("GINZA SIX")
@@ -38,3 +38,5 @@ driver.find_element(By.XPATH,'//*[@id="main-contents"]/section/article/div[4]/di
 # FILENAME = "test_selenium.png"
 # driver.save_screenshot(FILENAME)
 # driver.quit()
+
+
