@@ -14,7 +14,7 @@ oojimei = "花見川区"
 jityoumei = "朝日ケ丘"
 gaiku = "１丁目"
 banogo = "２番"
-FILENAME = "image.png"
+FILENAME = "picture/image.png"
 
 def chiba_sewage(ku = "中央区", tyomei = "青葉町", tyoume = "丁目なし", gaiku = "３５９番地"):
     driver = webdriver.Chrome()
