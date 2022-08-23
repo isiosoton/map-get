@@ -1,3 +1,4 @@
+import img2pdf
 import imp
 import chromedriver_binary
 import time
@@ -52,6 +53,8 @@ if shi in map_spots["spots"] and item in map_spots["items"]:
         else:
             saitama_road.road(longitude, latitude)
             # print("未実装")
+    with open("./pdf/output.pdf","wb") as f:
+        f.write(img2pdf.convert(['./picture/image.png']))
 else:
     log = "対象外地域"
     print(log)
