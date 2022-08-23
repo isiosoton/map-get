@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import chromedriver_binary
 import time
 from selenium import webdriver

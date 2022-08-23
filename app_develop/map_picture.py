@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import chromedriver_binary
 import time
 import map_chiba_sewage
@@ -25,7 +24,7 @@ tyome = "１丁目"
 gaiku = "1"
 
 
-nums = [NULL,NULL]
+nums = [None,None]
 
 if shi in map_spots["spots"] and item in map_spots["items"]:
     nums[0] = map_spots["spots"].index(shi)
@@ -34,7 +33,7 @@ if shi in map_spots["spots"] and item in map_spots["items"]:
         gaiku = gaiku.translate(str.maketrans({chr(0x0021 + i): chr(0xFF01 + i) for i in range(94)}))
         print(gaiku)
         gaiku += "番"
-        if tyome == NULL:
+        if tyome == None:
             tyome = "丁目なし"
             gaiku += "地"
         map_chiba_sewage.chiba_sewage(ku,tyomei,tyome,gaiku)
