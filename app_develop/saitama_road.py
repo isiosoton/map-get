@@ -25,7 +25,7 @@ def road(longitude, latitude):
     driver.find_element(By.XPATH, "//*[@id='agree_btn_area']/ul/li[1]/a").click() 
     time.sleep(4)
 
-    FILENAME = "image.png"
+    FILENAME = "picutre/image.png"
     w = driver.execute_script("return document.body.scrollWidth;")
     h = driver.execute_script("return document.body.scrollHeight;")
     driver.set_window_size(w,h)

@@ -3,13 +3,23 @@ import chromedriver_binary
 import time
 import map_chiba_sewage
 import map_chiba_street
+import coordinates
 
 map_spots = {"spots":["千葉市","さいたま市"], "items":["下水","道路"]}
 
+# ken = "埼玉県"
+# shi = "さいたま市"
+# item = "道路"
+# ku = "浦和区"
+# tyomei = "高砂"
+# tyome = "３丁目"
+# gaiku = "15"
+
+ken = "千葉県"
 shi = "千葉市"
 item = "道路"
 
-ku = "花見川区",
+ku = "花見川区"
 tyomei = "朝日ケ丘"
 tyome = "１丁目"
 gaiku = "1"
@@ -30,13 +40,21 @@ if shi in map_spots["spots"] and item in map_spots["items"]:
         map_chiba_sewage.chiba_sewage(ku,tyomei,tyome,gaiku)
     elif nums == [0,1]:
         map_chiba_street.chiba_street(ku,tyomei+tyome,gaiku)
-    elif nums == [1,0]:
-        print("未実装")
-    elif nums == [1,1]:
-        print("未実装")
-    
-        
+    elif nums[0] == 1:
+        jusyo = ken + shi + ku + tyomei + tyome + gaiku
+        # print(jusyo)
+        zahyo = coordinates.coordinates(jusyo)
+        latitude = zahyo["ido"]
+        longitude = zahyo["keido"]
+        # print(zahyo)
+        if nums[1] == 0:
+            print("未実装")
+        else:
+            print("未実装")
 else:
     log = "対象外地域"
     print(log)
+
+# https://www.sonicweb-asp.jp/saitama_g/map?theme=th_45#pos=139.649195,35.857156
+# https://www.sonicweb-asp.jp/saitama_g/map?theme=th_45139.64919535.857156
 
