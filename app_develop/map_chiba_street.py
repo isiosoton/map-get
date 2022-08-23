@@ -9,7 +9,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 
 def chiba_street(oojimei = "中央区", jityoumei = "青葉町", gaiku = "7"):
-    FILENAME = "picture/image.png"
+    FILENAME = "./picture/image.png"
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get("https://webgis.alandis.jp/chiba12/portal/nintei.html")

@@ -1,27 +1,29 @@
+import imp
 import chromedriver_binary
 import time
 import map_chiba_sewage
 import map_chiba_street
+import saitama_road
+import saitama_sewage
 import coordinates
 
 map_spots = {"spots":["千葉市","さいたま市"], "items":["下水","道路"]}
 
-# ken = "埼玉県"
-# shi = "さいたま市"
-# item = "道路"
-# ku = "浦和区"
-# tyomei = "高砂"
-# tyome = "３丁目"
-# gaiku = "15"
-
-ken = "千葉県"
-shi = "千葉市"
+ken = "埼玉県"
+shi = "さいたま市"
 item = "道路"
+ku = "浦和区"
+tyomei = "高砂"
+tyome = "３丁目"
+gaiku = "15"
 
-ku = "花見川区"
-tyomei = "朝日ケ丘"
-tyome = "１丁目"
-gaiku = "1"
+# ken = "千葉県"
+# shi = "千葉市"
+# item = "下水"
+# ku = "花見川区"
+# tyomei = "朝日ケ丘"
+# tyome = "１丁目"
+# gaiku = "1"
 
 
 nums = [None,None]
@@ -41,15 +43,15 @@ if shi in map_spots["spots"] and item in map_spots["items"]:
         map_chiba_street.chiba_street(ku,tyomei+tyome,gaiku)
     elif nums[0] == 1:
         jusyo = ken + shi + ku + tyomei + tyome + gaiku
-        # print(jusyo)
         zahyo = coordinates.coordinates(jusyo)
         latitude = zahyo["ido"]
         longitude = zahyo["keido"]
-        # print(zahyo)
         if nums[1] == 0:
-            print("未実装")
+            saitama_sewage.road(longitude, latitude)
+            # print("未実装")
         else:
-            print("未実装")
+            saitama_road.road(longitude, latitude)
+            # print("未実装")
 else:
     log = "対象外地域"
     print(log)
