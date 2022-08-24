@@ -43,13 +43,16 @@ def list_message(service, user_id, count):
         body = decode_base64url_data(message_detail['payload']['parts'][0]['body']['data'])
         mese = message_detail['payload']['headers']
         z = "0"
+        w = "0"
         for i in range(len(mese)):
             if mese[i]["name"] == "Subject":
                 z = mese[i]["value"]
-        print(z)
-        #print(message_detail['internalDate'])
+            elif mese[i]["name"]=="Return-Path":
+                w = mese[i]["value"]
+                w = w.strip("<>")
+            #print(w)
         internaldate = message_detail['internalDate']
-        return {"subject":z, "body":body, "internalDate":internaldate}
+        return {"addres":w, "subject":z, "body":body, "internalDate":internaldate}
         #print(body)
 
 # メイン処理
