@@ -1,4 +1,6 @@
-import img2pdf
+import os
+from PIL import Image
+# import img2pdf
 import imp
 import chromedriver_binary
 import time
@@ -10,21 +12,21 @@ import coordinates
 
 map_spots = {"spots":["千葉市","さいたま市"], "items":["下水","道路"]}
 
-ken = "埼玉県"
-shi = "さいたま市"
-item = "道路"
-ku = "浦和区"
-tyomei = "高砂"
-tyome = "３丁目"
-gaiku = "15"
+# ken = "埼玉県"
+# shi = "さいたま市"
+# item = "道路"
+# ku = "浦和区"
+# tyomei = "高砂"
+# tyome = "３丁目"
+# gaiku = "15"
 
-# ken = "千葉県"
-# shi = "千葉市"
-# item = "下水"
-# ku = "花見川区"
-# tyomei = "朝日ケ丘"
-# tyome = "１丁目"
-# gaiku = "1"
+ken = "千葉県"
+shi = "千葉市"
+item = "下水"
+ku = "花見川区"
+tyomei = "朝日ケ丘"
+tyome = "１丁目"
+gaiku = "1"
 
 
 nums = [None,None]
@@ -53,8 +55,17 @@ if shi in map_spots["spots"] and item in map_spots["items"]:
         else:
             saitama_road.road(longitude, latitude)
             # print("未実装")
-    with open("./pdf/output.pdf","wb") as f:
-        f.write(img2pdf.convert(['./picture/image.png']))
+
+    # with open("./pdf/output.pdf","wb") as f:
+    #     f.write(img2pdf.convert(['./picture/image.png']))
+    file = os.path.abspath("./picture/image.png")
+    
+    # 絶対パスを指定して、ファイルに書き込み
+    image1 = Image.open(file, "r")
+    # image1 = Image.open(rfile)
+    im_pdf = image1.convert("RGB")
+    im_pdf.save("./pdf/output.pdf","r")
+
 else:
     log = "対象外地域"
     print(log)
