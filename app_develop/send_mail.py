@@ -1,4 +1,5 @@
 import pickle
+import os
 import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -43,7 +44,7 @@ def send_message(service, user_id, message):
         print('An error occurred: %s' % error)
 
 #  メインとなる処理
-def main(to_email):
+def main(to_email,message_text):
     #  アクセストークンの取得
     creds = None
     if os.path.exists('token.pickle'):
@@ -62,8 +63,8 @@ def main(to_email):
     #  メール本文の作成
     sender = 'intern.ohg.24b@gmail.com' # 送信者のアドレス
     #to_email = 'intern.ohg.24b@gmail.com' # 受信者のアドレス
-    subject = 'メール送信自動化テスト'
-    message_text = 'メール送信の自動化テストをしています。テストでーーーーーす'
+    subject = '地図送信'
+    # message_text = 'メール送信の自動化テストをしています。テストでーーーーーす'
 
     # ファイルを添付
     path = "./picture/image.png"
@@ -73,7 +74,8 @@ def main(to_email):
             Name=basename(path)
         )
     part['Content-Disposition'] = 'attachment; filename="%s"' % basename(path)
-    msg.attach(part)
+    if "該当地域の地図画像です。" == message_text:
+        msg.attach(part)
 
 
     message = create_message(sender, to_email, subject, message_text)
@@ -81,5 +83,5 @@ def main(to_email):
     send_message(service, 'me', message)
 
 #  プログラム実行
-#if __name__ == '__main__':
-    #main()
+if __name__ == '__main__':
+    main("intern.ohg.24b@gmail.com","送信テスト")
