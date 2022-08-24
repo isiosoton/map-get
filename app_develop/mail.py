@@ -47,25 +47,17 @@ def list_message(service, user_id, count):
         body = "0"
         z = "0"
         w = "0"
-        if "CATEGORY_PERSONAL" in message_detail['labelIds']: # == ["IMPORTANT", , "INBOX"]:
+        if 'data' in message_detail['payload']['parts'][0]['body']:
             body = decode_base64url_data(message_detail['payload']['parts'][0]['body']['data'])
             mese = message_detail['payload']['headers']
             for i in range(len(mese)):
                 if mese[i]["name"] == "Subject":
                     z = mese[i]["value"]
-                elif mese[i]["name"]=="Return-Path":
+                elif mese[i]["name"] == "Return-Path":
                     w = mese[i]["value"]
                     w = w.strip("<>")
-                #print(w)
-        elif "IMPORTANT" in message_detail['labelIds']:  # ["IMPORTANT", , "INBOX"]:
-            body = decode_base64url_data(message_detail['payload']['parts'][0]['body']['data'])
-            mese = message_detail['payload']['headers']
-            for i in range(len(mese)):
-                if mese[i]["name"] == "Subject":
-                    z = mese[i]["value"]
-            w = "intern.ohg.24b@gmail.com"
-            # print(z,w,body)
-
+            if w == "0":
+                w = "intern.ohg.24b@gmail.com"
         internaldate = message_detail['internalDate']
         return {"addres":w, "subject":z, "body":body, "internalDate":internaldate}
         #print(body)
