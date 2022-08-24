@@ -38,7 +38,6 @@ def map_picture(addres):
         nums[1] = map_spots["items"].index(item)
         if nums == [0,0]:
             gaiku = gaiku.translate(str.maketrans({chr(0x0021 + i): chr(0xFF01 + i) for i in range(94)}))
-            print(gaiku)
             gaiku += "番"
             if tyome == None:
                 tyome = "丁目なし"

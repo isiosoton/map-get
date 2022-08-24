@@ -30,27 +30,42 @@ def list_message(service, user_id, count):
 
     # message id を元に、message の内容を確認
     for message_id in message_ids["messages"]:
-        message_detail = (
-            service.users()
-            .messages()
-            .get(userId="me", id=message_id["id"])
-            .execute()
-        )
-        #pp.pprint(message_detail)
+        try:
+            message_detail = (
+                service.users()
+                .messages()
+                .get(userId="me", id=message_id["id"])
+                .execute()
+            )
+        except:
+            print('下書き中によるエラー')
+            return {"addres":"0", "subject":"0", "body":"0", "internalDate":"0"}
         item = next((m for m in message_detail['payload']['headers'] if m['name'] == 'From'), None)
         if item:
             print("From:" + item['value'])
-        body = decode_base64url_data(message_detail['payload']['parts'][0]['body']['data'])
-        mese = message_detail['payload']['headers']
+        # pp.pprint(message_detail)
+        body = "0"
         z = "0"
         w = "0"
-        for i in range(len(mese)):
-            if mese[i]["name"] == "Subject":
-                z = mese[i]["value"]
-            elif mese[i]["name"]=="Return-Path":
-                w = mese[i]["value"]
-                w = w.strip("<>")
-            #print(w)
+        if "CATEGORY_PERSONAL" in message_detail['labelIds']: # == ["IMPORTANT", , "INBOX"]:
+            body = decode_base64url_data(message_detail['payload']['parts'][0]['body']['data'])
+            mese = message_detail['payload']['headers']
+            for i in range(len(mese)):
+                if mese[i]["name"] == "Subject":
+                    z = mese[i]["value"]
+                elif mese[i]["name"]=="Return-Path":
+                    w = mese[i]["value"]
+                    w = w.strip("<>")
+                #print(w)
+        elif "IMPORTANT" in message_detail['labelIds']:  # ["IMPORTANT", , "INBOX"]:
+            body = decode_base64url_data(message_detail['payload']['parts'][0]['body']['data'])
+            mese = message_detail['payload']['headers']
+            for i in range(len(mese)):
+                if mese[i]["name"] == "Subject":
+                    z = mese[i]["value"]
+            w = "intern.ohg.24b@gmail.com"
+            # print(z,w,body)
+
         internaldate = message_detail['internalDate']
         return {"addres":w, "subject":z, "body":body, "internalDate":internaldate}
         #print(body)
