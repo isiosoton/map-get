@@ -1,13 +1,19 @@
 import mail
 
-y = mail.main(1)
+def test():
+    y = mail.main(1)
+    x = y
 
-while True:
-    x = mail.main(1)
-    print(x["subject"])
+    while True:
+        x = mail.main(1)
+        print(x["subject"])
 
 
 
-    if x != y and x["subject"]=="serch addres": #xとyが同じならwile文そのまま実行
-        break
-print("whileから抜けたよ")
+        if x["internalDate"] != y["internalDate"] and x["subject"]=="serch addres": #xとyが同じならwile文そのまま実行
+            break
+    print("whileから抜けたよ")
+
+    return x
+
+#test()
