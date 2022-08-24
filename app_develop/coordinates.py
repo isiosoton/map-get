@@ -10,9 +10,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 def coordinates(jusyo = "埼玉県さいたま市浦和区高砂3丁目15−1"):
     driver = webdriver.Chrome()
-    driver.maximize_window()
     driver.get("https://www.geocoding.jp/?q="+jusyo)
-    time.sleep(2)
+    time.sleep(1)
     ido = driver.find_element(By.XPATH,'//*[@id="result"]/span[2]/b[1]').text
     keido = driver.find_element(By.XPATH,'//*[@id="result"]/span[2]/b[2]').text
     return {"ido":ido,"keido":keido}
