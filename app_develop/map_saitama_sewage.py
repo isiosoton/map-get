@@ -16,22 +16,27 @@ from time import sleep
 
 def road(longitude, latitude):
     url = "https://www.sonicweb-asp.jp/saitama_g/map?theme=th_90#pos=" + longitude + "," + latitude
-    FILENAME = "./picture/image.png"
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.get(url)
-    time.sleep(2)
-    iframe = driver.find_element(By.TAG_NAME, 'iframe')
-    driver.switch_to.frame(iframe)
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//*[@id='agree_btn_area']/ul/li[1]/a").click() 
-    time.sleep(4)
+    FILENAME = "./picture/sewage.png"
 
-    # w = driver.execute_script("return document.body.scrollWidth;")
-    # h = driver.execute_script("return document.body.scrollHeight;")
-    # driver.set_window_size(w,h)
-    driver.save_screenshot(FILENAME)
-    driver.quit()
+    try:
+        driver = webdriver.Chrome()
+        driver.maximize_window()
+        driver.get(url)
+        time.sleep(2)
+        iframe = driver.find_element(By.TAG_NAME, 'iframe')
+        driver.switch_to.frame(iframe)
+        time.sleep(2)
+        driver.find_element(By.XPATH, "//*[@id='agree_btn_area']/ul/li[1]/a").click() 
+        time.sleep(4)
+
+        # w = driver.execute_script("return document.body.scrollWidth;")
+        # h = driver.execute_script("return document.body.scrollHeight;")
+        # driver.set_window_size(w,h)
+        driver.save_screenshot(FILENAME)
+        driver.quit()
+    except:
+        return False
+
     return True
 
 # road("139.645462", "35.861665")

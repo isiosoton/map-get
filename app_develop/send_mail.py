@@ -1,6 +1,7 @@
 import pickle
 import os
 import os.path
+from tkinter.messagebox import NO
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -44,7 +45,7 @@ def send_message(service, user_id, message):
         print('An error occurred: %s' % error)
 
 #  メインとなる処理
-def main(to_email,message_text):
+def main(to_email,judge):
     #  アクセストークンの取得
     creds = None
     if os.path.exists('token.pickle'):
@@ -66,22 +67,49 @@ def main(to_email,message_text):
     subject = '地図送信'
     # message_text = 'メール送信の自動化テストをしています。テストでーーーーーす'
 
-    # ファイルを添付
-    path = "./picture/image.png"
-    with open(path, "rb") as f:
-        part = MIMEApplication(
-            f.read(),
-            Name=basename(path)
-        )
-    part['Content-Disposition'] = 'attachment; filename="%s"' % basename(path)
-    if "該当地域の地図画像です。" == message_text:
-        msg.attach(part)
+
+
+    # メッセージの設定
+    # {"spot":False,"sewage":False,"street":False}
+    message_text = None
+    if judge["spot"]:
+        if judge["sewage"] and judge["street"]:
+            message_text = "該当地域の地図画像です。"
+            post_picture("./picture/sewage.png")
+            post_picture("./picture/street.png")
+        else:
+            if judge["sewage"]:
+                post_picture("./picture/sewage.png")
+            else:
+                message_text = "下水道の地図が取得できませんでした。"
+
+            if judge["street"]:
+                post_picture("./picture/street.png")
+            else:
+                message_text = "道路の地図が取得できませんでした。"
+    else:
+        message_text = "対象外地域により送信できませんでした。"
+    # if "該当地域の地図画像です。" == message_text:
+
 
 
     message = create_message(sender, to_email, subject, message_text)
     #  Gmail APIを呼び出してメール送信
     send_message(service, 'me', message)
 
+def post_picture(path):
+    # ファイルを添付
+    # path = "./picture/image.png"
+    with open(path, "rb") as f:
+        part = MIMEApplication(
+            f.read(),
+            Name=basename(path)
+        )
+    part['Content-Disposition'] = 'attachment; filename="%s"' % basename(path)
+    msg.attach(part)
+
 #  プログラム実行
 if __name__ == '__main__':
-    main("intern.ohg.24b@gmail.com","送信テスト")
+    # main("intern.ohg.24b@gmail.com","送信テスト")
+    main("intern.ohg.24b@gmail.com",{"spot":True,"sewage":True,"street":True})
+
