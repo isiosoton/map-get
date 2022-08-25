@@ -13,58 +13,49 @@ import coordinates
 
 def map_picture(addres):
 
-    map_spots = {"spots":["千葉市","さいたま市"], "items":["下水","道路"]}
+    spots = ["千葉市","さいたま市"]
 
-    # ken = "埼玉県"
-    # shi = "さいたま市"
-    # item = "道路"
-    # ku = "浦和区"
-    # tyomei = "高砂"
-    # tyome = "３丁目"
-    # gaiku = "15"
+    ken = "埼玉県"
+    shi = "さいたま市"
+    ku = "浦和区"
+    tyomei = "高砂"
+    tyome = "３丁目"
+    gaiku = "15"
 
-    ken = "千葉県"
-    shi = "千葉市"
-    item = "下水"
-    ku = "花見川区"
-    tyomei = "朝日ケ丘"
-    tyome = "１丁目"
-    gaiku = "1"
+    # ken = "千葉県"
+    # shi = "千葉市"
+    # ku = "花見川区"
+    # tyomei = "朝日ケ丘"
+    # tyome = "１丁目"
+    # gaiku = "1"
 
-    ken = "大阪府"
+    nums = 6
 
-    nums = [None,None]
+    logs = {"spot":False,"sewage":False,"street":False}
 
-    if shi in map_spots["spots"] and item in map_spots["items"]:
-        nums[0] = map_spots["spots"].index(shi)
-        nums[1] = map_spots["items"].index(item)
+    if shi in spots:
+        logs["spot"] = True
+        nums = spots.index(shi)
         log = "ログデータ"
         safe_comment = "該当地域の地図画像です。"
-        try:
-            if nums == [0,0]:
-                gaiku = gaiku.translate(str.maketrans({chr(0x0021 + i): chr(0xFF01 + i) for i in range(94)}))
-                gaiku += "番"
-                if tyome == None:
-                    tyome = "丁目なし"
-                    gaiku += "地"
-                if map_chiba_sewage.chiba_sewage(ku,tyomei,tyome,gaiku):
-                    log = safe_comment
-            elif nums == [0,1]:
-                if map_chiba_street.chiba_street(ku,tyomei+tyome,gaiku):
-                    log = safe_comment
-            elif nums[0] == 1:
-                jusyo = ken + shi + ku + tyomei + tyome + gaiku
-                zahyo = coordinates.coordinates(jusyo)
+        if nums == 0:
+            logs["street"] = map_chiba_street.chiba_street(ku,tyomei+tyome,gaiku)
+            gaiku = gaiku.translate(str.maketrans({chr(0x0021 + i): chr(0xFF01 + i) for i in range(94)}))
+            gaiku += "番"
+            if tyome == None:
+                tyome = "丁目なし"
+                gaiku += "地"
+            logs["sewage"] = map_chiba_sewage.chiba_sewage(ku,tyomei,tyome,gaiku)
+        elif nums == 1:
+            jusyo = ken + shi + ku + tyomei + tyome + gaiku
+            zahyo = coordinates.coordinates(jusyo)
+            if zahyo["accept"]:
                 latitude = zahyo["ido"]
                 longitude = zahyo["keido"]
-                if nums[1] == 0:
-                    if map_saitama_sewage.road(longitude, latitude):
-                        log = safe_comment
-                else:
-                    if map_saitama_street.road(longitude, latitude):
-                        log = safe_comment
-        except:
-            log = "地図取得に失敗しました。"
+                logs["sewage"] = map_saitama_sewage.road(longitude, latitude)
+                logs["street"] = map_saitama_street.road(longitude, latitude)
+            else:
+                logs["spot"] = False
 
         # with open("./pdf/output.pdf","wb") as f:
         #     f.write(img2pdf.convert(['./picture/image.png']))
@@ -75,11 +66,8 @@ def map_picture(addres):
         # # image1 = Image.open(rfile)
         # im_pdf = image1.convert("RGB")
         # im_pdf.save("./pdf/output.pdf","r")
-        return log
 
-    else:
-        log = "対象外地域により送信できませんでした。"
-        return log
+    return logs
 
     # https://www.sonicweb-asp.jp/saitama_g/map?theme=th_45#pos=139.649195,35.857156
     # https://www.sonicweb-asp.jp/saitama_g/map?theme=th_45139.64919535.857156
