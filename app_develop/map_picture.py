@@ -64,6 +64,9 @@ def map_picture(addres):
 
     return logs
 
+if __name__ == '__main__':
+    map_picture("千葉県千葉市稲毛区稲毛3-7")
+
     # https://www.sonicweb-asp.jp/saitama_g/map?theme=th_45#pos=139.649195,35.857156
     # https://www.sonicweb-asp.jp/saitama_g/map?theme=th_45139.64919535.857156
 

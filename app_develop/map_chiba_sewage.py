@@ -76,9 +76,10 @@ def chiba_sewage(ku = "中央区", tyomei = "青葉町", tyoume = "丁目なし"
 
 # 動作確認用
 if __name__ == "__main__":
-    print(change_data("花見川区","朝日ケ丘","１丁目","1"))
-    print(change_data("花見川区","天戸町","１丁目","15"))
-    print(change_data("花見川区","天戸町","丁目なし","１番地"))
+    # print(change_data("花見川区","朝日ケ丘","１丁目","1"))
+    # print(change_data("花見川区","天戸町","１丁目","15"))
+    # print(change_data("花見川区","天戸町","丁目なし","１番地"))
+    print(change_data("稲毛区","稲毛","３丁目","7"))
 
 # handle_array = driver.window_handles
 # driver.switch_to.window(driver.window_handles[0])
