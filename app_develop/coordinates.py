@@ -8,15 +8,16 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 
-def coordinates(jusyo = "埼玉県さいたま市浦和区高砂3丁目15−1"):
+def coordinates(jusyo):
     try:
         driver = webdriver.Chrome()
+        driver.implicitly_wait(2)
         driver.get("https://www.geocoding.jp/?q="+jusyo)
-        time.sleep(1)
         ido = driver.find_element(By.XPATH,'//*[@id="result"]/span[2]/b[1]').text
         keido = driver.find_element(By.XPATH,'//*[@id="result"]/span[2]/b[2]').text
     except:
         return {"accept":False,"ido":None,"keido":None}
     return {"accept":True,"ido":ido,"keido":keido}
 
-# coordinates()
+if __name__ == "__main__":
+    coordinates("埼玉県さいたま市浦和区高砂3丁目15−1")

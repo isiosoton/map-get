@@ -20,12 +20,13 @@ def road(longitude, latitude):
 
     try:    
         driver = webdriver.Chrome()
+        driver.implicitly_wait(5)
         driver.maximize_window()
         driver.get(url)
-        time.sleep(2)
+        # time.sleep(2)
         iframe = driver.find_element(By.TAG_NAME, 'iframe')
         driver.switch_to.frame(iframe)
-        time.sleep(2)
+        # time.sleep(2)
         driver.find_element(By.XPATH, "//*[@id='agree_btn_area']/ul/li[1]/a").click() 
         time.sleep(4)
 
@@ -38,5 +39,5 @@ def road(longitude, latitude):
         return False
     
     return True
-
-# road("139.645462", "35.861665")
+if __name__ == "__main__":
+    road("139.645462", "35.861665")
