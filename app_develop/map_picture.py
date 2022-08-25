@@ -12,23 +12,27 @@ import out_of_sync
 
 def map_picture(addres):
 
-    # addres_list = out_of_sync.main(addres)
+    addres_list = out_of_sync.main(addres)
 
     spots = ["千葉市","さいたま市"]
 
-    # ken = "埼玉県"
     # shi = "さいたま市"
     # ku = "浦和区"
     # tyomei = "高砂"
     # tyome = "３丁目"
     # gaiku = "15"
 
-    ken = "千葉県"
-    shi = "千葉市"
-    ku = "花見川区"
-    tyomei = "朝日ケ丘"
-    tyome = "１丁目"
-    gaiku = "1"
+    # shi = "千葉市"
+    # ku = "花見川区"
+    # tyomei = "朝日ケ丘"
+    # tyome = "１丁目"
+    # gaiku = "1"
+
+    shi = addres_list[0]
+    ku = addres_list[1]
+    tyomei = addres_list[2]
+    tyome = addres_list[3]
+    gaiku = addres_list[4]
 
     nums = 6
 
@@ -48,7 +52,7 @@ def map_picture(addres):
                 logs["spot"] = tiba_object["spot"]
 
         elif nums == 1:
-            jusyo = ken + shi + ku + tyomei + tyome + gaiku
+            jusyo = shi + ku + tyomei + tyome + gaiku
             zahyo = coordinates.coordinates(jusyo)
             if zahyo["accept"]:
                 latitude = zahyo["ido"]
