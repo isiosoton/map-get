@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "pythonPath":"/Users/koheinakama/Desktop/git_hub/gitgit/intern-ohg/.venv/bin/python",
+            "python":"/Users/koheinakama/Desktop/git_hub/gitgit/intern-ohg/.venv/bin/python",
             "justMyCode": true
         }
     ]
