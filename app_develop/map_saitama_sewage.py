@@ -17,15 +17,13 @@ from time import sleep
 def road(longitude, latitude):
     url = "https://www.sonicweb-asp.jp/saitama_g/map?theme=th_90#pos=" + longitude + "," + latitude
     FILENAME = "./picture/sewage.png"
-
     try:
         driver = webdriver.Chrome()
+        driver.implicitly_wait(5)
         driver.maximize_window()
         driver.get(url)
-        time.sleep(2)
         iframe = driver.find_element(By.TAG_NAME, 'iframe')
         driver.switch_to.frame(iframe)
-        time.sleep(2)
         driver.find_element(By.XPATH, "//*[@id='agree_btn_area']/ul/li[1]/a").click() 
         time.sleep(4)
 
@@ -39,4 +37,5 @@ def road(longitude, latitude):
 
     return True
 
-# road("139.645462", "35.861665")
+if __name__ == "__main__":
+    road("139.645462", "35.861665")

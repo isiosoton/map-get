@@ -88,7 +88,7 @@ def main(to_email,judge):
             else:
                 message_text = "道路の地図が取得できませんでした。"
     else:
-        message_text = "対象外地域により送信できませんでした。"
+        message_text = "地域が取得できませんでした。"
     # if "該当地域の地図画像です。" == message_text:
 
 
