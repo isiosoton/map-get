@@ -36,8 +36,9 @@ def main(addres):
     addres = addres.translate(str.maketrans({chr(0xFF01 + i): chr(0x21 + i) for i in range(94)}))
     addres = replace_hyphen(addres, replace_hyphen='-')
     #print(addres)
+    addres = addres.strip()
     addres = (addres.replace("丁目", "-"))
-    addres = addres.replace("市", '\n').replace("区", '\n').replace('-', '\n').replace('番地', '\n').replace('番', '\n').replace('号', '').split('\n')
+    addres = addres.replace("市", '\n').replace("区", '\n').replace('-', '\n').replace('番地', '\n').replace('番', '\n').replace('号', '').replace(' ', '').replace('   ', '').replace('　', '').split('\n')
     addres[0] += "市"
     addres[1] += "区"
     addres[3] += "丁目"
