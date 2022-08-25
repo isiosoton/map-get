@@ -10,7 +10,7 @@ def test():
 
 
 
-        if x["internalDate"] != y["internalDate"] and x["subject"]=="serch addres": #xとyが同じならwile文そのまま実行
+        if x["internalDate"] != y["internalDate"] and x["subject"]=="get map": #xとyが同じならwile文そのまま実行
             break
     print("whileから抜けたよ")
 
