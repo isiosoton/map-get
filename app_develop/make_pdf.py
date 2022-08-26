@@ -1,20 +1,18 @@
+from email.mime import image
 import imp
 import imp
 from PIL import Image, ImageFilter
 import os.path
 
-def main():
-    # with open("./pdf/output.pdf","wb") as f:
-    #     f.write(img2pdf.convert(['./picture/image.png']))
-    file_path = "./picture/image.png"
-    picture_file = os.path.abspath(file_path)
-    # print(picture_file)
+def main(file_name):
+    file_path_png = "./picture/" + file_name + ".png"
+    picture_file = os.path.abspath(file_path_png)
+    image1 = Image.open(picture_file).convert("RGB")
     # 絶対パスを指定して、ファイルに書き込み
-    image1 = Image.open(file_path).convert("RGB")
-    # image1 = Image.open(file_path, "r")
-    # image1 = Image.open(r+picture_file)
-    # im_pdf = image1
-    image1.save("./pdf/image.pdf","r")
+    # print(type(image1))
+    file_path_pdf = "./pdf/" + file_name + ".pdf"
+    image1.save(file_path_pdf)
 
 if __name__ == "__main__":
-    main()
+    # main(["sewage","street"])
+    main("sewage")

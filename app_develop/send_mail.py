@@ -17,11 +17,9 @@ from os.path import basename
 #  Gmail APIのスコープを設定
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
-# メールの内容を作成
-msg = MIMEMultipart()
 
 #  メール本文の作成
-def create_message(sender, to_email, subject, message_text):
+def create_message(msg, sender, to_email, subject, message_text):
     #メール送信先
     msg['to'] = to_email
     # メール送信元
@@ -46,6 +44,8 @@ def send_message(service, user_id, message):
 
 #  メインとなる処理
 def main(to_email,judge):
+    # メールの内容を作成
+    msg = MIMEMultipart()
     #  アクセストークンの取得
     creds = None
     if os.path.exists('token.pickle'):
@@ -75,16 +75,20 @@ def main(to_email,judge):
     if judge["spot"]:
         if judge["sewage"] and judge["street"]:
             message_text = "該当地域の地図画像です。"
-            post_picture("./picture/sewage.png")
-            post_picture("./picture/street.png")
+            # msg = post_picture(msg,"./picture/sewage.png")
+            # msg = post_picture(msg,"./picture/street.png")
+            msg = post_picture(msg,"./pdf/sewage.pdf")
+            msg = post_picture(msg,"./pdf/street.pdf")
         else:
             if judge["sewage"]:
-                post_picture("./picture/sewage.png")
+                # meg = post_picture("./picture/sewage.png")
+                meg = post_picture("./pdf/sewage.pdf")
             else:
                 message_text = "下水道の地図が取得できませんでした。"
 
             if judge["street"]:
-                post_picture("./picture/street.png")
+                # msg = post_picture(msg,"./picture/street.png")
+                msg = post_picture(msg,"./pdf/street.pdf")
             else:
                 message_text = "道路の地図が取得できませんでした。"
     else:
@@ -93,11 +97,11 @@ def main(to_email,judge):
 
 
 
-    message = create_message(sender, to_email, subject, message_text)
+    message = create_message(msg,sender, to_email, subject, message_text)
     #  Gmail APIを呼び出してメール送信
     send_message(service, 'me', message)
 
-def post_picture(path):
+def post_picture(msg,path):
     # ファイルを添付
     # path = "./picture/image.png"
     with open(path, "rb") as f:
@@ -107,6 +111,7 @@ def post_picture(path):
         )
     part['Content-Disposition'] = 'attachment; filename="%s"' % basename(path)
     msg.attach(part)
+    return msg
 
 #  プログラム実行
 if __name__ == '__main__':

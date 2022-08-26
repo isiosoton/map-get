@@ -36,8 +36,9 @@ def main(addres):
     addres = addres.translate(str.maketrans({chr(0xFF01 + i): chr(0x21 + i) for i in range(94)}))
     addres = replace_hyphen(addres, replace_hyphen='-')
     #print(addres)
+    addres = addres.strip()
     addres = (addres.replace("丁目", "-"))
-    addres = addres.replace("市", '\n').replace("区", '\n').replace('-', '\n').replace('番地', '\n').replace('番', '\n').replace('号', '').split('\n')
+    addres = addres.replace("市", '\n').replace("区", '\n').replace('-', '\n').replace('番地', '\n').replace('番', '\n').replace('号', '').replace(' ', '').replace('   ', '').replace('　', '').split('\n')
     addres[0] += "市"
     addres[1] += "区"
     addres[3] += "丁目"
@@ -47,8 +48,9 @@ def main(addres):
 if __name__ == "__main__":
     tiba = ["千葉県千葉市稲毛区稲毛３丁目７−３０","千葉県千葉市稲毛区稲毛3-7","千葉県千葉市稲毛区稲毛町５丁目269−１","千葉市稲毛区稲毛町５ー２６９ー１","千葉県浦安市北栄1-15-9","千葉県千葉市美浜区真砂五丁目１５−１","千葉県千葉市美浜区真砂5丁目15−1","千葉県千葉市美浜区真砂５丁目１５番１","千葉県千葉市美浜区真砂５-１５−１","千葉県千葉市美浜区真砂６丁目１−１"]
     saitama = ["埼玉県さいたま市大宮区大門町2丁目1-1","埼玉県さいたま市大宮区大門町２ー1-１","埼玉県さいたま市大宮区大門町2-1-1","さいたま市大宮区大門町２－１－１","埼玉県川口市栄町3-14-3","埼玉県さいたま市南区沼影1-20-1","埼玉県さいたま市南区沼影一丁目20-1","さいたま市南区沼影１丁目20-1","埼玉県さいたま市南区沼影１丁目２０番地１号","埼玉県さいたま市大宮区大門町６丁目５"]
-    for i in saitama:
-        main(i)
+    # for i in saitama:
+    #     main(i)
+    print(main("千葉県千葉市稲毛区稲毛3-7"))
     
     "埼玉県さいたま市南区沼影１丁目２０番地１号"
     "千葉県千葉市美浜区真砂五丁目１５−１"
