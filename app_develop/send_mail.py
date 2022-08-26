@@ -75,16 +75,20 @@ def main(to_email,judge):
     if judge["spot"]:
         if judge["sewage"] and judge["street"]:
             message_text = "該当地域の地図画像です。"
-            msg = post_picture(msg,"./picture/sewage.png")
-            msg = post_picture(msg,"./picture/street.png")
+            # msg = post_picture(msg,"./picture/sewage.png")
+            # msg = post_picture(msg,"./picture/street.png")
+            msg = post_picture(msg,"./pdf/sewage.pdf")
+            msg = post_picture(msg,"./pdf/street.pdf")
         else:
             if judge["sewage"]:
-                meg = post_picture("./picture/sewage.png")
+                # meg = post_picture("./picture/sewage.png")
+                meg = post_picture("./pdf/sewage.pdf")
             else:
                 message_text = "下水道の地図が取得できませんでした。"
 
             if judge["street"]:
-                msg = post_picture(msg,"./picture/street.png")
+                # msg = post_picture(msg,"./picture/street.png")
+                msg = post_picture(msg,"./pdf/street.pdf")
             else:
                 message_text = "道路の地図が取得できませんでした。"
     else:
