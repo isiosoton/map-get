@@ -1,3 +1,3 @@
 /app_develop/pdf/*
 /app_develop/picture/*
-# /app_develop/token.pickle
+/app_develop/secret/*
