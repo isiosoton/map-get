@@ -72,10 +72,10 @@ if __name__ == '__main__':
     saitama = ["埼玉県さいたま市大宮区大門町2丁目1-1","埼玉県さいたま市大宮区大門町２ー1-１","埼玉県さいたま市大宮区大門町2-1-1","さいたま市大宮区大門町２－１－１","埼玉県川口市栄町3-14-3","埼玉県さいたま市南区沼影1-20-1","埼玉県さいたま市南区沼影一丁目20-1","さいたま市南区沼影１丁目20-1","埼玉県さいたま市南区沼影１丁目２０番地１号","埼玉県さいたま市大宮区大門町６丁目５"]
     all_list = tiba + saitama
     all_object = []
-    # for i in all_list:
-    #     all_object.append(map_picture(i))
-    # print(all_object)
-    print(map_picture(saitama[3]))
+    for i in all_list:
+        all_object.append(map_picture(i))
+    print(all_object)
+    # print(map_picture(saitama[3]))
     # https://www.sonicweb-asp.jp/saitama_g/map?theme=th_45#pos=139.649195,35.857156
     # https://www.sonicweb-asp.jp/saitama_g/map?theme=th_45139.64919535.857156
 

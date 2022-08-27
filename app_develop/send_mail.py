@@ -1,11 +1,11 @@
 import pickle
 import os
+import base64
+import json
 import os.path
-from tkinter.messagebox import NO
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-import base64
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
@@ -44,6 +44,10 @@ def send_message(service, user_id, message):
 
 #  メインとなる処理
 def main(to_email,judge):
+    # 送信側メールアドレスの設定
+    addres_datas = open('./secret/addres.json', 'r')
+    addres_datas = json.load(addres_datas)
+    addres = addres_datas["mailaddres"]
     # メールの内容を作成
     msg = MIMEMultipart()
     #  アクセストークンの取得
@@ -62,40 +66,30 @@ def main(to_email,judge):
             pickle.dump(creds, token)
     service = build('gmail', 'v1', credentials=creds)
     #  メール本文の作成
-    sender = 'intern.ohg.24b@gmail.com' # 送信者のアドレス
-    #to_email = 'intern.ohg.24b@gmail.com' # 受信者のアドレス
+    sender = addres # 送信者のアドレス
     subject = '地図送信'
-    # message_text = 'メール送信の自動化テストをしています。テストでーーーーーす'
 
 
 
     # メッセージの設定
-    # {"spot":False,"sewage":False,"street":False}
     message_text = ""
     if judge["spot"]:
         if judge["sewage"] and judge["street"]:
             message_text += "該当地域の地図画像です。"
-            # msg = post_picture(msg,"./picture/sewage.png")
-            # msg = post_picture(msg,"./picture/street.png")
             msg = post_picture(msg,"./pdf/sewage.pdf")
             msg = post_picture(msg,"./pdf/street.pdf")
         else:
             if judge["sewage"]:
-                # meg = post_picture("./picture/sewage.png")
                 msg = post_picture("./pdf/sewage.pdf")
             else:
                 message_text += "下水道の地図が取得できませんでした。"
 
             if judge["street"]:
-                # msg = post_picture(msg,"./picture/street.png")
                 msg = post_picture(msg,"./pdf/street.pdf")
             else:
                 message_text += "道路の地図が取得できませんでした。"
     else:
         message_text += "地域が取得できませんでした。"
-    # if "該当地域の地図画像です。" == message_text:
-
-
 
     message = create_message(msg,sender, to_email, subject, message_text)
     #  Gmail APIを呼び出してメール送信
@@ -115,6 +109,8 @@ def post_picture(msg,path):
 
 #  プログラム実行
 if __name__ == '__main__':
-    # main("intern.ohg.24b@gmail.com","送信テスト")
-    main("intern.ohg.24b@gmail.com",{"spot":True,"sewage":False,"street":False})
+    addres_datas = open('./secret/addres.json', 'r')
+    addres_datas = json.load(addres_datas)
+    addres = addres_datas["mailaddres"]
+    main(addres,{"spot":True,"sewage":False,"street":False})
 

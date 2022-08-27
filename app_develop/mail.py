@@ -1,4 +1,5 @@
 import base64
+import json
 import pprint as pp
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -17,6 +18,9 @@ def decode_base64url_data(data):
 
 
 def list_message(service, user_id, count):
+    addres_datas = open('./secret/addres.json', 'r')
+    addres_datas = json.load(addres_datas)
+    addres = addres_datas["mailaddres"]
     message_ids = (
         service.users()
         .messages()
@@ -57,7 +61,7 @@ def list_message(service, user_id, count):
                     w = mese[i]["value"]
                     w = w.strip("<>")
             if w == "0":
-                w = "intern.ohg.24b@gmail.com"
+                w = addres
         internaldate = message_detail['internalDate']
         return {"addres":w, "subject":z, "body":body, "internalDate":internaldate}
         #print(body)
