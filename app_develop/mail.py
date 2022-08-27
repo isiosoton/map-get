@@ -1,11 +1,14 @@
 import base64
 import json
+import logging
 import pprint as pp
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 from gmail_credential import get_credential
+
+logger = logging.getLogger(__name__)
 
 
 def decode_base64url_data(data):
